@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<metadata xml:lang="en">
+	<Esri>
+		<CreaDate>20201016</CreaDate>
+		<CreaTime>09302900</CreaTime>
+		<ArcGISFormat>1.0</ArcGISFormat>
+		<SyncOnce>FALSE</SyncOnce>
+		<DataProperties>
+			<itemProps>
+				<itemName Sync="TRUE">Inventoried_Roadless_USFS</itemName>
+				<itemSize Sync="TRUE">0.325</itemSize>
+				<itemLocation>
+					<linkage Sync="TRUE">file://\\DESKTOP-5UCFP3I\C$\Users\indig\OneDrive\Documents\BREN\Group Project\GIS\Data\_Layers Saved to GDrive\_Inventoried_Roadless_USFS\Inventoried_Roadless_USFS.shp</linkage>
+					<protocol Sync="TRUE">Local Area Network</protocol>
+				</itemLocation>
+				<nativeExtBox>
+					<westBL Sync="TRUE">-13458848.502000</westBL>
+					<eastBL Sync="TRUE">-13357045.632867</eastBL>
+					<southBL Sync="TRUE">4667023.522300</southBL>
+					<northBL Sync="TRUE">4828475.241100</northBL>
+					<exTypeCode Sync="TRUE">1</exTypeCode>
+				</nativeExtBox>
+				<imsContentType Sync="TRUE">002</imsContentType></itemProps>
+			<coordRef>
+				<type Sync="TRUE">Projected</type>
+				<geogcsn Sync="TRUE">GCS_WGS_1984</geogcsn>
+				<csUnits Sync="TRUE">Linear Unit: Meter (1.000000)</csUnits>
+				<projcsn Sync="TRUE">WGS_1984_Web_Mercator_Auxiliary_Sphere</projcsn>
+				<peXml Sync="TRUE">&lt;ProjectedCoordinateSystem xsi:type='typens:ProjectedCoordinateSystem' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:typens='http://www.esri.com/schemas/ArcGIS/2.6.0'&gt;&lt;WKT&gt;PROJCS[&amp;quot;WGS_1984_Web_Mercator_Auxiliary_Sphere&amp;quot;,GEOGCS[&amp;quot;GCS_WGS_1984&amp;quot;,DATUM[&amp;quot;D_WGS_1984&amp;quot;,SPHEROID[&amp;quot;WGS_1984&amp;quot;,6378137.0,298.257223563]],PRIMEM[&amp;quot;Greenwich&amp;quot;,0.0],UNIT[&amp;quot;Degree&amp;quot;,0.0174532925199433]],PROJECTION[&amp;quot;Mercator_Auxiliary_Sphere&amp;quot;],PARAMETER[&amp;quot;False_Easting&amp;quot;,0.0],PARAMETER[&amp;quot;False_Northing&amp;quot;,0.0],PARAMETER[&amp;quot;Central_Meridian&amp;quot;,0.0],PARAMETER[&amp;quot;Standard_Parallel_1&amp;quot;,0.0],PARAMETER[&amp;quot;Auxiliary_Sphere_Type&amp;quot;,0.0],UNIT[&amp;quot;Meter&amp;quot;,1.0],AUTHORITY[&amp;quot;EPSG&amp;quot;,3857]]&lt;/WKT&gt;&lt;XOrigin&gt;-20037700&lt;/XOrigin&gt;&lt;YOrigin&gt;-30241100&lt;/YOrigin&gt;&lt;XYScale&gt;148923141.92838538&lt;/XYScale&gt;&lt;ZOrigin&gt;-100000&lt;/ZOrigin&gt;&lt;ZScale&gt;10000&lt;/ZScale&gt;&lt;MOrigin&gt;-100000&lt;/MOrigin&gt;&lt;MScale&gt;10000&lt;/MScale&gt;&lt;XYTolerance&gt;0.001&lt;/XYTolerance&gt;&lt;ZTolerance&gt;0.001&lt;/ZTolerance&gt;&lt;MTolerance&gt;0.001&lt;/MTolerance&gt;&lt;HighPrecision&gt;true&lt;/HighPrecision&gt;&lt;WKID&gt;102100&lt;/WKID&gt;&lt;LatestWKID&gt;3857&lt;/LatestWKID&gt;&lt;/ProjectedCoordinateSystem&gt;</peXml>
+			</coordRef>
+			<lineage>
+				<Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Analysis Tools.tbx\Clip" Date="20201016" Time="093031">Clip Roadless_Areas%3A_2001_Roadless_Rule__Feature_Layer_ CABY_Boundary "C:\Users\indig\OneDrive\Documents\BREN\Group Project\GIS\Data\_Layers Saved to GDrive\_Inventoried_Roadless_USFS\Inventoried_Roadless_USFS.shp" #</Process>
+			</lineage>
+			<LayerFile>{"type":"CIMLayerDocument","version":"2.6.0","build":24783,"layers":["CIMPATH=map/inventoried_roadless_usfs.xml"],"layerDefinitions":[{"type":"CIMFeatureLayer","name":"Inventoried_Roadless_USFS","uRI":"CIMPATH=map/inventoried_roadless_usfs.xml","sourceModifiedTime":{"type":"TimeInstant"},"useSourceMetadata":true,"description":"Inventoried_Roadless_USFS","layerElevation":{"type":"CIMLayerElevationSurface","mapElevationID":"{753F1423-E2B7-42B7-B631-41EFA15F5E12}"},"expanded":true,"layerType":"Operational","showLegends":true,"visibility":true,"displayCacheType":"Permanent","maxDisplayCacheAge":5,"showPopups":true,"serviceLayerID":-1,"refreshRate":-1,"refreshRateUnit":"esriTimeUnitsSeconds","autoGenerateFeatureTemplates":true,"featureElevationExpression":"0","featureTable":{"type":"CIMFeatureTable","displayField":"NAME","editable":true,"dataConnection":{"type":"CIMStandardDataConnection","workspaceConnectionString":"DATABASE=..\\..\\..\\..\\OneDrive\\Documents\\BREN\\Group Project\\GIS\\Data\\_Layers Saved to GDrive\\_Inventoried_Roadless_USFS","workspaceFactory":"Shapefile","dataset":"Inventoried_Roadless_USFS","datasetType":"esriDTFeatureClass"},"studyAreaSpatialRel":"esriSpatialRelUndefined","searchOrder":"esriSearchOrderSpatial"},"htmlPopupEnabled":true,"selectable":true,"featureCacheType":"Session","displayFiltersType":"ByScale","labelClasses":[{"type":"CIMLabelClass","expression":"$feature.NAME","expressionEngine":"Arcade","featuresToLabel":"AllVisibleFeatures","maplexLabelPlacementProperties":{"type":"CIMMaplexLabelPlacementProperties","featureType":"Polygon","avoidPolygonHoles":true,"canOverrunFeature":true,"canPlaceLabelOutsidePolygon":true,"canRemoveOverlappingLabel":true,"canStackLabel":true,"connectionType":"Unambiguous","constrainOffset":"NoConstraint","contourAlignmentType":"Page","contourLadderType":"Straight","contourMaximumAngle":90,"enableConnection":true,"featureWeight":0,"fontHeightReductionLimit":4,"fontHeightReductionStep":0.5,"fontWidthReductionLimit":90,"fontWidthReductionStep":5,"graticuleAlignmentType":"Straight","keyNumberGroupName":"Default","labelBuffer":15,"labelLargestPolygon":true,"labelPriority":-1,"labelStackingProperties":{"type":"CIMMaplexLabelStackingProperties","stackAlignment":"ChooseBest","maximumNumberOfLines":3,"minimumNumberOfCharsPerLine":3,"maximumNumberOfCharsPerLine":24,"separators":[{"type":"CIMMaplexStackingSeparator","separator":" ","splitAfter":true},{"type":"CIMMaplexStackingSeparator","separator":",","visible":true,"splitAfter":true}]},"lineFeatureType":"General","linePlacementMethod":"OffsetCurvedFromLine","maximumLabelOverrun":80,"maximumLabelOverrunUnit":"Point","minimumFeatureSizeUnit":"Map","multiPartOption":"OneLabelPerPart","offsetAlongLineProperties":{"type":"CIMMaplexOffsetAlongLineProperties","placementMethod":"BestPositionAlongLine","labelAnchorPoint":"CenterOfLabel","distanceUnit":"Percentage","useLineDirection":true},"pointExternalZonePriorities":{"type":"CIMMaplexExternalZonePriorities","aboveLeft":4,"aboveCenter":2,"aboveRight":1,"centerRight":3,"belowRight":5,"belowCenter":7,"belowLeft":8,"centerLeft":6},"pointPlacementMethod":"AroundPoint","polygonAnchorPointType":"GeometricCenter","polygonBoundaryWeight":0,"polygonExternalZones":{"type":"CIMMaplexExternalZonePriorities","aboveLeft":4,"aboveCenter":2,"aboveRight":1,"centerRight":3,"belowRight":5,"belowCenter":7,"belowLeft":8,"centerLeft":6},"polygonFeatureType":"General","polygonInternalZones":{"type":"CIMMaplexInternalZonePriorities","center":1},"polygonPlacementMethod":"HorizontalInPolygon","primaryOffset":1,"primaryOffsetUnit":"Point","removeExtraWhiteSpace":true,"repetitionIntervalUnit":"Point","rotationProperties":{"type":"CIMMaplexRotationProperties","rotationType":"Arithmetic","alignmentType":"Straight"},"secondaryOffset":100,"strategyPriorities":{"type":"CIMMaplexStrategyPriorities","stacking":1,"overrun":2,"fontCompression":3,"fontReduction":4,"abbreviation":5},"thinningDistanceUnit":"Point","truncationMarkerCharacter":".","truncationMinimumLength":1,"truncationPreferredCharacters":"aeiou","truncationExcludedCharacters":"0123456789"},"name":"Class 1","priority":-1,"standardLabelPlacementProperties":{"type":"CIMStandardLabelPlacementProperties","featureType":"Line","featureWeight":"Low","labelWeight":"High","numLabelsOption":"OneLabelPerName","lineLabelPosition":{"type":"CIMStandardLineLabelPosition","above":true,"inLine":true,"parallel":true},"lineLabelPriorities":{"type":"CIMStandardLineLabelPriorities","aboveStart":3,"aboveAlong":3,"aboveEnd":3,"centerStart":3,"centerAlong":3,"centerEnd":3,"belowStart":3,"belowAlong":3,"belowEnd":3},"pointPlacementMethod":"AroundPoint","pointPlacementPriorities":{"type":"CIMStandardPointPlacementPriorities","aboveLeft":2,"aboveCenter":2,"aboveRight":1,"centerLeft":3,"centerRight":2,"belowLeft":3,"belowCenter":3,"belowRight":2},"rotationType":"Arithmetic","polygonPlacementMethod":"AlwaysHorizontal"},"textSymbol":{"type":"CIMSymbolReference","symbol":{"type":"CIMTextSymbol","blockProgression":"TTB","depth3D":1,"extrapolateBaselines":true,"fontEffects":"Normal","fontEncoding":"Unicode","fontFamilyName":"Tahoma","fontStyleName":"Regular","fontType":"Unspecified","haloSize":1,"height":10,"hinting":"Default","horizontalAlignment":"Left","kerning":true,"letterWidth":100,"ligatures":true,"lineGapType":"ExtraLeading","symbol":{"type":"CIMPolygonSymbol","symbolLayers":[{"type":"CIMSolidFill","enable":true,"color":{"type":"CIMRGBColor","values":[0,0,0,100]}}]},"textCase":"Normal","textDirection":"LTR","verticalAlignment":"Bottom","verticalGlyphOrientation":"Right","wordSpacing":100,"billboardMode3D":"FaceNearPlane"}},"useCodedValue":true,"visibility":true,"iD":-1}],"renderer":{"type":"CIMSimpleRenderer","patch":"Default","symbol":{"type":"CIMSymbolReference","symbol":{"type":"CIMPolygonSymbol","symbolLayers":[{"type":"CIMSolidStroke","enable":true,"capStyle":"Round","joinStyle":"Round","lineStyle3D":"Strip","miterLimit":10,"width":0.69999999999999996,"color":{"type":"CIMRGBColor","values":[110,110,110,100]}},{"type":"CIMSolidFill","enable":true,"color":{"type":"CIMRGBColor","values":[212.06,218.789999999999992,252.449999999999989,100]}}]}}},"scaleSymbols":true,"snappable":true}]}</LayerFile>
+		</DataProperties>
+		<SyncDate>20201016</SyncDate>
+		<SyncTime>09354400</SyncTime>
+		<ModDate>20201016</ModDate>
+		<ModTime>09354400</ModTime>
+	</Esri>
+	<eainfo>
+		<detailed Name="Inventoried_Roadless_USFS">
+			<enttyp>
+				<enttypl Sync="TRUE">Inventoried_Roadless_USFS</enttypl>
+				<enttypt Sync="TRUE">Feature Class</enttypt>
+				<enttypc Sync="TRUE">120</enttypc>
+			</enttyp>
+			<attr>
+				<attrlabl Sync="TRUE">FID</attrlabl>
+				<attalias Sync="TRUE">FID</attalias>
+				<attrtype Sync="TRUE">OID</attrtype>
+				<attwidth Sync="TRUE">4</attwidth>
+				<atprecis Sync="TRUE">0</atprecis>
+				<attscale Sync="TRUE">0</attscale>
+				<attrdef Sync="TRUE">Internal feature number.</attrdef>
+				<attrdefs Sync="TRUE">Esri</attrdefs>
+				<attrdomv>
+					<udom Sync="TRUE">Sequential unique whole numbers that are automatically generated.</udom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">Shape</attrlabl>
+				<attalias Sync="TRUE">Shape</attalias>
+				<attrtype Sync="TRUE">Geometry</attrtype>
+				<attwidth Sync="TRUE">0</attwidth>
+				<atprecis Sync="TRUE">0</atprecis>
+				<attscale Sync="TRUE">0</attscale>
+				<attrdef Sync="TRUE">Feature geometry.</attrdef>
+				<attrdefs Sync="TRUE">Esri</attrdefs>
+				<attrdomv>
+					<udom Sync="TRUE">Coordinates defining the features.</udom>
+				</attrdomv>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">REGION</attrlabl>
+				<attalias Sync="TRUE">REGION</attalias>
+				<attrtype Sync="TRUE">SmallInteger</attrtype>
+				<attwidth Sync="TRUE">2</attwidth>
+				<atprecis Sync="TRUE">2</atprecis>
+				<attscale Sync="TRUE">0</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">FOREST</attrlabl>
+				<attalias Sync="TRUE">FOREST</attalias>
+				<attrtype Sync="TRUE">String</attrtype>
+				<attwidth Sync="TRUE">31</attwidth>
+				<atprecis Sync="TRUE">0</atprecis>
+				<attscale Sync="TRUE">0</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">STATE</attrlabl>
+				<attalias Sync="TRUE">STATE</attalias>
+				<attrtype Sync="TRUE">String</attrtype>
+				<attwidth Sync="TRUE">2</attwidth>
+				<atprecis Sync="TRUE">0</atprecis>
+				<attscale Sync="TRUE">0</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">NAME</attrlabl>
+				<attalias Sync="TRUE">NAME</attalias>
+				<attrtype Sync="TRUE">String</attrtype>
+				<attwidth Sync="TRUE">60</attwidth>
+				<atprecis Sync="TRUE">0</atprecis>
+				<attscale Sync="TRUE">0</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">CATEGORY</attrlabl>
+				<attalias Sync="TRUE">CATEGORY</attalias>
+				<attrtype Sync="TRUE">String</attrtype>
+				<attwidth Sync="TRUE">4</attwidth>
+				<atprecis Sync="TRUE">0</atprecis>
+				<attscale Sync="TRUE">0</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">ACRES</attrlabl>
+				<attalias Sync="TRUE">ACRES</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">15</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">OBJECTID</attrlabl>
+				<attalias Sync="TRUE">OBJECTID</attalias>
+				<attrtype Sync="TRUE">Integer</attrtype>
+				<attwidth Sync="TRUE">5</attwidth>
+				<atprecis Sync="TRUE">5</atprecis>
+				<attscale Sync="TRUE">0</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">SHAPE_Leng</attrlabl>
+				<attalias Sync="TRUE">SHAPE_Leng</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">15</attscale>
+			</attr>
+			<attr>
+				<attrlabl Sync="TRUE">SHAPE_Area</attrlabl>
+				<attalias Sync="TRUE">SHAPE_Area</attalias>
+				<attrtype Sync="TRUE">Double</attrtype>
+				<attwidth Sync="TRUE">19</attwidth>
+				<atprecis Sync="TRUE">18</atprecis>
+				<attscale Sync="TRUE">15</attscale>
+				<attrdef Sync="TRUE">Area of feature in internal units squared.</attrdef>
+				<attrdefs Sync="TRUE">Esri</attrdefs>
+				<attrdomv>
+					<udom Sync="TRUE">Positive real numbers that are automatically generated.</udom>
+				</attrdomv>
+			</attr>
+		</detailed>
+	</eainfo>
+	<mdChar>
+		<CharSetCd value="004"/>
+	</mdChar>
+	<mdHrLv>
+		<ScopeCd value="005"/>
+	</mdHrLv>
+	<mdDateSt>20181016</mdDateSt>
+	<mdStanName>ArcGIS Metadata</mdStanName>
+	<mdStanVer>1.0</mdStanVer>
+	<dataIdInfo>
+		<idCitation>
+			<resTitle>Roadless Areas: 2001 Roadless Rule (Feature Layer)</resTitle>
+			<presForm><PresFormCd value="005" Sync="TRUE"></PresFormCd></presForm></idCitation>
+		<idAbs>This dataset is the official data for the 2001 Roadless Area Conservation Rule (36 CFR 294, Subpart B). It contains the Inventoried Roadless Areas (IRA) that were used in the Final Environmental Impact Statement for the 2001 Roadless Area Conservation Rule. The IRA data was originally submitted to the Geospatial Service and Technology Center (GSTC - Located in Salt Lake City Utah) by all national forests through their Regional Offices for the Forest Service?s Roadless Area Conservation Initiative. The data was consolidated at the GSTC and used in the Draft Environment Impact Statement. Between the draft and final stages of the Environmental Impact Statement, the data was updated by the forests to reflect any corrections to Inventoried Roadless Areas that were based on existing forest plans and administrative record. The data was also supplemented to include Special Designated Area information and to include Inventoried Roadless Areas within Special Designated Areas. The data was resubmitted to the GSTC on July 21, 2000 for consolidation and the completed coverage was used in the Roadless Area Conservation Final Environmental Impact Statement. IRAs are based on completed forest plans, forest plans in revision where the agency has established an inventory (this information should be available in Appendix C of most forest plans), or other assessments that are completed and adopted by the agency. RARE II (Roadless Area Review and Evaluation of 1977 and 1978) information was used in cases where a forest does not have a more current roadless inventory, which was established using RARE II information. Metadata</idAbs>
+		<idPurp>Roadless Areas: 2001 Roadless Rule</idPurp>
+		<themeKeys>
+			<keyword>geospatial</keyword>
+		</themeKeys>
+		<searchKeys>
+			<keyword>geospatial</keyword>
+		</searchKeys>
+		<resConst>
+			<Consts><useLimit>The USDA Forest Service makes no warranty, expressed or implied, including the warranties of merchantability and fitness for a particular purpose, nor assumes any legal liability or responsibility for the accuracy, reliability, completeness or utility of these geospatial data, or for the improper or incorrect use of these geospatial data. These geospatial data and related maps or graphics are not legal documents and are not intended to be used as such. The data and maps may not be used to determine title, ownership, legal descriptions or boundaries, legal jurisdiction, or restrictions that may be in place on either public or private land. Natural hazards may or may not be depicted on the data and maps, and land users should exercise due caution. The data are dynamic and may change over time. The user is responsible to verify the limitations of the geospatial data and to use the data accordingly.
+
+As a work of the United States Government, these data are within the public domain of the United States. Additionally, The U.S. Forest Service waives copyright and related rights in the work worldwide through the CC0 1.0 Universal Public Domain Dedication (which can be found at https://creativecommons.org/publicdomain/zero/1.0/).</useLimit>
+			</Consts>
+		</resConst>
+		<envirDesc Sync="TRUE">Microsoft Windows 10 Version 10.0 (Build 18363) ; Esri ArcGIS 12.6.2.24783</envirDesc><dataLang><languageCode value="eng" Sync="TRUE"></languageCode><countryCode value="USA" Sync="TRUE"></countryCode></dataLang><spatRpType><SpatRepTypCd value="001" Sync="TRUE"></SpatRepTypCd></spatRpType><dataExt><geoEle><GeoBndBox esriExtentType="search"><exTypeCode Sync="TRUE">1</exTypeCode><westBL Sync="TRUE">-120.902893</westBL><eastBL Sync="TRUE">-119.988382</eastBL><northBL Sync="TRUE">39.741684</northBL><southBL Sync="TRUE">38.617462</southBL></GeoBndBox></geoEle></dataExt></dataIdInfo>
+	<mdLang><languageCode value="eng" Sync="TRUE"></languageCode><countryCode value="USA" Sync="TRUE"></countryCode></mdLang><distInfo><distFormat><formatName Sync="TRUE">Shapefile</formatName></distFormat><distTranOps><transSize Sync="TRUE">0.325</transSize></distTranOps></distInfo><mdHrLvName Sync="TRUE">dataset</mdHrLvName><refSysInfo><RefSystem><refSysID><identCode code="3857" Sync="TRUE"></identCode><idCodeSpace Sync="TRUE">EPSG</idCodeSpace><idVersion Sync="TRUE">8.8(9.3.1.2)</idVersion></refSysID></RefSystem></refSysInfo><spatRepInfo><VectSpatRep><geometObjs Name="Inventoried_Roadless_USFS"><geoObjTyp><GeoObjTypCd value="002" Sync="TRUE"></GeoObjTypCd></geoObjTyp><geoObjCnt Sync="TRUE">120</geoObjCnt></geometObjs><topLvl><TopoLevCd value="001" Sync="TRUE"></TopoLevCd></topLvl></VectSpatRep></spatRepInfo><spdoinfo><ptvctinf><esriterm Name="Inventoried_Roadless_USFS"><efeatyp Sync="TRUE">Simple</efeatyp><efeageom code="4" Sync="TRUE"></efeageom><esritopo Sync="TRUE">FALSE</esritopo><efeacnt Sync="TRUE">120</efeacnt><spindex Sync="TRUE">TRUE</spindex><linrefer Sync="TRUE">FALSE</linrefer></esriterm></ptvctinf></spdoinfo></metadata>
