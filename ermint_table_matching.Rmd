@@ -1,0 +1,49 @@
+---
+title: "ermit table matching"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(here)
+library(janitor)
+```
+
+```{r}
+# Reading in tables
+
+tbl_3B <- read_csv(here("data/ermit_tables/ermit_hillslope_polygons_step3B_15k_join.csv")) %>% 
+  clean_names()
+
+tbl_4 <- read_csv(here("data/ermit_tables/representative_flowpath_pts_step4_15k.csv")) %>% 
+  clean_names()
+
+tbl_erm <- read_csv(here("data/ermit_tables/temporary_hillslope_table_step5_15k.csv")) %>% 
+  clean_names()
+
+# Find column in 3B w/ same # of entries as 5 - may not exist (couple multiple 3B polygons to one erosion value)
+# Find 3 - 4 - 5 cols
+
+tbl_3B_max <- tbl_3B %>% 
+  summarise_all(max)
+
+tbl_3B_distinct <- tbl_3B %>% 
+  summarise_all(n_distinct)
+
+tbl_4_max <- tbl_4 %>% 
+  summarise_all(max)
+
+tbl_4_distinct <- tbl_4 %>% 
+  summarise_all(n_distinct)
+
+tbl_5_max <- tbl_erm %>% 
+  summarise_all(max)
+
+tbl_5_distinct <- tbl_erm %>% 
+  summarise_all(n_distinct)
+
+
+```
+
