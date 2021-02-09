@@ -2,15 +2,27 @@
 
 library(shiny)
 library(tidyverse)
+library(bslib)
 
-ui <- fluidPage(navbarPage("Wildfire & Water Quality in the Central Sierra Nevada",
+
+my_theme <- bs_theme(
+    bg = "white",
+    fg = "steelblue",
+    primary = "darkblue",
+    base_font = font_google("Poppins")
+)
+# html color codes: https://htmlcolorcodes.com/color-names/
+
+ui <- fluidPage(theme = my_theme,
+    
+    navbarPage("Wildfire & Water Quality in the Central Sierra Nevada",
                            tabPanel("Home",
                                     sidebarLayout(
                                         sidebarPanel(img(src = "ARLogo_Horiz_color.jpg", height = 70),
                                                      img(src = "F_F-RGB-LOGO-Trans-Bkgrnd.png", height = 100)),
                                         mainPanel(img(src = "El Dorado National Forest - Jose Antonio Galloso - 3.jpg", height = 300),
                                                   h3("Our Project"),
-                                                  p("Forests to Faucets is a group master's thesis project at the Bren School of Environmental and Science Management at UC Santa Barbara. We will identify locations for fuels reduction to maximize benefits to river ecosystems and clean water supply. This model will be looking at fire and water processes in the Cosumnes, American, Bear, and Yuba (CABY) river regions in the Sierra Nevada Forests."),
+                                                  p("Forests to Faucets is a group master's thesis project at the ", a(href="https://bren.ucsb.edu/", " Bren School of Environmental and Science Management at UC Santa Barbara."), "We will identify locations for fuels reduction to maximize benefits to river ecosystems and clean water supply. This model will be looking at fire and water processes in the Cosumnes, American, Bear, and Yuba (CABY) river regions in the Sierra Nevada Forests."),
                                                   h4("Wildfire threatens river ecosystems and clean water supply by increasing erosion and sediment delivery to rivers and streams."),
                                                   p("Forests are a critical piece of California’s natural water infrastructure. However, high severity wildfires pose a significant threat to river ecosystems and clean water supply in the Sierra Nevada. High severity wildfires destroy vegetation and alter soil properties, leading to an increase in erosion and an influx of sediment into rivers and streams. Sediment can interfere with drinking water treatment, reduce reservoir storage capacity, and harm fish and amphibians. Climate change, drought, and a century of fire suppression have caused a shift toward larger, high severity fires. Fuel treatments like prescribed fire can help reduce future fire severity by removing fuel from the forest floor. However, limited funding, staff capacity, public opinion, and arduous permitting have led to a backlog of areas in need of treatment."),
                                                   h4("Prescribed fire can protect river ecosystems and clean water supply by reducing the severity of future wildfires."),
