@@ -4,6 +4,8 @@ library(shiny)
 library(tidyverse)
 library(bslib)
 
+source("res_sed.R")
+
 
 my_theme <- bs_theme(
     bg = "white",
@@ -71,22 +73,26 @@ ui <- fluidPage(theme = my_theme,
                                                         min = 0, 
                                                         max = 100, 
                                                         value = c(40, 60))),
-                                        mainPanel("Scatterplot of reservoir capacity versus percent capacity remaining with points of the selected size class highlighted")
+                                        mainPanel("Scatterplot of reservoir capacity versus percent capacity remaining with points of the selected size class highlighted",
+                                                  plotOutput("res_sed_plot"))
                                     ))
                 )
                 
 )
 
 server <- function(input, output) {
-    sw_reactive <- reactive ( {
+    res_sed_reactive <- reactive ( {
         
-        starwars %>%
-            filter(species %in% input$pick_species)
+        res_sed %>%
+            filter(percent_remaining>=input$slider2[1] & percent_remaining<=input$slider2[2])
     })
     
-    output$sw_plot <- renderPlot(
-        ggplot(data = sw_reactive(), aes(x = mass, y = height)) +
-            geom_point(aes(color = species))
+    output$res_sed_plot <- renderPlot(
+        ggplot(data = res_sed_reactive(), aes(x = year, y = percent_remaining)) +
+            geom_point(aes(color = stor_cap_af))+
+            scale_x_log10()+
+            scale_color_gradient(trans = "log10")+
+            theme_minimal()
         
     )
     
