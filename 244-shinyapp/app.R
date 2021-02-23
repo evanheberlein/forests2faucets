@@ -53,9 +53,11 @@ ui <- fluidPage(theme = my_theme,
                            tabPanel("Fire History",
                                     sidebarLayout(
                                         sidebarPanel(
-                                            dateInput("date", 
+                                            selectInput("year", 
                                                       label = h3("Select year:"), 
-                                                      value = "2014-01-01")
+                                                      choices = c(2000:2019),
+                                                      selected = 2017,
+                                                      multiple = TRUE)
                                         ),
                                         mainPanel("graph showing acres burned per year in the CABY region in the last ~50 years with selected year highlighted",
                                                   plotOutput("fire_hist_plot"))
