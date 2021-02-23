@@ -9,8 +9,8 @@ source("res_sed.R")
 
 my_theme <- bs_theme(
     bg = "white",
-    fg = "steelblue",
-    primary = "darkblue",
+    fg = "#324452",
+    primary = "#97BDBF",
     base_font = font_google("Poppins")
 )
 # html color codes: https://htmlcolorcodes.com/color-names/
@@ -20,7 +20,7 @@ ui <- fluidPage(theme = my_theme,
     navbarPage("Wildfire & Water Quality in the Central Sierra Nevada",
                            tabPanel("Home",
                                     sidebarLayout(
-                                        sidebarPanel(img(src = "ARLogo_Horiz_color.jpg", height = 70),
+                                        sidebarPanel(img(src = "ARLogo_Horiz - TRANS.png", height = 70),
                                                      img(src = "F_F-RGB-LOGO-Trans-Bkgrnd.png", height = 100)),
                                         mainPanel(img(src = "El Dorado National Forest - Jose Antonio Galloso - 3.jpg", height = 300),
                                                   h3("Our Project"),
