@@ -1,12 +1,20 @@
+## FYI RUNNING INTO SOME ISSUES WITH SOURCES. 
+## IF ALL WAS IN ENVIRONMENT, THEN WAS HAPPY. 
+## EXCEPT FOR RASTERS. UNHAPPY. 
+## INTERACTIVITY NOT EXISTANT FOR FEAS or FIRE HIST. 
+
 # Set up libraries
 
 library(shiny)
 library(tidyverse)
 library(bslib)
 
-source("res_sed.R")
+# Read in sources
+ source("res_sed.R")
+ source("fire_hist.R")
+ source("feas.R")
 
-
+# Set up a theme
 my_theme <- bs_theme(
     bg = "white",
     fg = "#324452",
@@ -49,7 +57,8 @@ ui <- fluidPage(theme = my_theme,
                                                       label = h3("Select year:"), 
                                                       value = "2014-01-01")
                                         ),
-                                        mainPanel("graph showing acres burned per year in the CABY region in the last ~50 years with selected year highlighted")
+                                        mainPanel("graph showing acres burned per year in the CABY region in the last ~50 years with selected year highlighted",
+                                                  plotOutput("fire_hist_plot"))
                                     )),
                            tabPanel("Prescribed Fire Constraints",
                                     sidebarLayout(
@@ -63,7 +72,8 @@ ui <- fluidPage(theme = my_theme,
                                                                           "Power Lines" = 5,
                                                                           "Roadless Areas" = 6),
                                                                 selected = 1)),
-                                        mainPanel("Map of CABY with different feasibility constraints turning on and off")
+                                        mainPanel("Map of CABY with different feasibility constraints turning on and off",
+                                                  plotOutput("feas_plot"))
                                     )),
                            tabPanel("Reservoir Sedimentation",
                                     sidebarLayout(
@@ -93,9 +103,29 @@ server <- function(input, output) {
             scale_x_log10()+
             scale_color_gradient(trans = "log10")+
             theme_minimal()
-        
     )
     
+    output$feas_plot <- renderPlot(
+        ggplot() +
+            geom_raster(data = veg_rast, aes(x = x, y = y), fill = "darkgrey")+
+            geom_raster(data = firehist_rast, aes(x = x, y = y), fill = "darkgrey") +
+            geom_raster(data = fueltreat_rast, aes(x = x, y = y), fill = "darkgrey") +
+            geom_raster(data = powerlines_rast, aes(x = x, y = y), fill = "darkgrey") +
+            geom_raster(data = roadless_rast, aes(x = x, y = y), fill = "darkgrey") +
+            geom_raster(data = WUI_rast, aes(x = x, y = y), fill = "darkgrey") +
+            theme_void() + 
+            coord_sf(xlim = c(-422820,4740), ylim = c(9265042,9765928))
+        )
+    
+    output$fire_hist_plot <- renderPlot(
+        ggplot(data = fire_hist, aes(x = year, y = sum)) +
+            geom_col() +
+            labs( x = "Year",
+                  y = "Total Area Burned (ac)") +
+            theme_minimal() +
+            scale_x_continuous(expand = c(0,0)) +
+            scale_y_continuous(expand = c(0,0))
+    )
 }
 
 shinyApp(ui = ui, server = server)
