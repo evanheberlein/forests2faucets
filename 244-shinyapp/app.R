@@ -42,7 +42,7 @@ ui <- fluidPage(theme = my_theme,
                            tabPanel("Subwatersheds",
                                     sidebarLayout(
                                         sidebarPanel(
-                                            selectInput("select", label = h3("Select sub-watershed of interest:"), 
+                                            radioButtons("select", label = h3("Select sub-watershed of interest:"), 
                                                     choices = list("Cosumnes River Watershed" = 1, 
                                                                    "American River Watershed" = 2, 
                                                                    "Bear River Watershed" = 3, 
@@ -53,7 +53,7 @@ ui <- fluidPage(theme = my_theme,
                            tabPanel("Fire History",
                                     sidebarLayout(
                                         sidebarPanel(
-                                            selectInput("year", 
+                                            selectInput("selectYear", 
                                                       label = h3("Select year:"), 
                                                       choices = c(2000:2019),
                                                       selected = 2017,
@@ -104,6 +104,8 @@ server <- function(input, output) {
             geom_point(aes(color = stor_cap_af))+
             scale_x_log10()+
             scale_color_gradient(trans = "log10")+
+            labs( x = "Year",
+                  y = "Percent capacity remaining") +
             theme_minimal()
     )
     
@@ -119,9 +121,16 @@ server <- function(input, output) {
             coord_sf(xlim = c(-422820,4740), ylim = c(9265042,9765928))
         )
     
+    fire_hist_reactive <- reactive ( {
+        
+        fire_hist %>%
+            mutate(highlight = ifelse(year %in% input$selectYear, "yes", "no"))
+    })
+    
     output$fire_hist_plot <- renderPlot(
-        ggplot(data = fire_hist, aes(x = year, y = sum)) +
+        ggplot(data = fire_hist_reactive(), aes(x = year, y = sum, fill = highlight)) +
             geom_col() +
+            scale_fill_manual(values = c("yes"="tomato", "no" ="gray"), guide = FALSE)+
             labs( x = "Year",
                   y = "Total Area Burned (ac)") +
             theme_minimal() +
