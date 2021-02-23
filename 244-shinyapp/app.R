@@ -109,17 +109,44 @@ server <- function(input, output) {
             theme_minimal()
     )
     
-    output$feas_plot <- renderPlot(
-        ggplot() +
-            geom_raster(data = veg_rast, aes(x = x, y = y), fill = "darkgrey")+
-            geom_raster(data = firehist_rast, aes(x = x, y = y), fill = "darkgrey") +
-            geom_raster(data = fueltreat_rast, aes(x = x, y = y), fill = "darkgrey") +
-            geom_raster(data = powerlines_rast, aes(x = x, y = y), fill = "darkgrey") +
-            geom_raster(data = roadless_rast, aes(x = x, y = y), fill = "darkgrey") +
-            geom_raster(data = WUI_rast, aes(x = x, y = y), fill = "darkgrey") +
+    output$feas_plot <- renderPlot( {
+        base_plot <- ggplot() +
             theme_void() + 
             coord_sf(xlim = c(-422820,4740), ylim = c(9265042,9765928))
-        )
+        
+        if(all(c(1) %in% input$checkGroup)) {
+            base_plot <- base_plot +  geom_raster(data = veg_rast, 
+                                                 aes(x = x, y = y), 
+                                                 fill = "darkgrey") }
+        
+        if(all(c(2) %in% input$checkGroup)) {
+            base_plot <- base_plot +  geom_raster(data = firehist_rast, 
+                                                  aes(x = x, y = y), 
+                                                  fill = "darkgrey") }
+        
+        if(all(c(3) %in% input$checkGroup)) {
+            base_plot <- base_plot +  geom_raster(data = fueltreat_rast, 
+                                                  aes(x = x, y = y), 
+                                                  fill = "darkgrey") }
+        
+        if(all(c(4) %in% input$checkGroup)) {
+            base_plot <- base_plot +  geom_raster(data = WUI_rast, 
+                                                  aes(x = x, y = y), 
+                                                  fill = "darkgrey") }
+        
+        if(all(c(5) %in% input$checkGroup)) {
+            base_plot <- base_plot +  geom_raster(data = powerlines_rast, 
+                                                  aes(x = x, y = y), 
+                                                  fill = "darkgrey") }
+        
+        if(all(c(6) %in% input$checkGroup)) {
+            base_plot <- base_plot +  geom_raster(data = roadless_rast, 
+                                                  aes(x = x, y = y), 
+                                                  fill = "darkgrey") }
+
+        base_plot
+        
+        })
     
     fire_hist_reactive <- reactive ( {
         
