@@ -8,6 +8,7 @@
 library(shiny)
 library(tidyverse)
 library(bslib)
+library(tmap)
 
 # Read in sources
  source("res_sed.R")
