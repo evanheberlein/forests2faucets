@@ -50,8 +50,7 @@ ui <- fluidPage(theme = my_theme,
                                                                    "Bear River Watershed" = 3, 
                                                                    "Yuba River Watershed" = 4), 
                                                     selected = 1)),
-                                        mainPanel("Map of CABY with Subwatershed highlighted",
-                                                  plotOutput("watersheds_plot"))
+                                        mainPanel(plotOutput("watersheds_plot"))
                                     )),
                            tabPanel("Fire History",
                                     sidebarLayout(
@@ -62,8 +61,7 @@ ui <- fluidPage(theme = my_theme,
                                                       selected = 2017,
                                                       multiple = TRUE)
                                         ),
-                                        mainPanel("graph showing acres burned per year in the CABY region in the last ~50 years with selected year highlighted",
-                                                  plotOutput("fire_hist_plot"))
+                                        mainPanel(plotOutput("fire_hist_plot"))
                                     )),
                            tabPanel("Prescribed Fire Constraints",
                                     sidebarLayout(
@@ -77,8 +75,7 @@ ui <- fluidPage(theme = my_theme,
                                                                           "Power Lines" = 5,
                                                                           "Roadless Areas" = 6),
                                                                 selected = 1)),
-                                        mainPanel("Map of CABY with different feasibility constraints turning on and off",
-                                                  plotOutput("feas_plot"))
+                                        mainPanel(plotOutput("feas_plot"))
                                     )),
                            tabPanel("Reservoir Sedimentation",
                                     sidebarLayout(
@@ -88,8 +85,7 @@ ui <- fluidPage(theme = my_theme,
                                                         min = 0, 
                                                         max = 100, 
                                                         value = c(40, 60))),
-                                        mainPanel("Scatterplot of reservoir capacity versus percent capacity remaining with points of the selected size class highlighted",
-                                                  plotOutput("res_sed_plot"))
+                                        mainPanel(plotOutput("res_sed_plot"))
                                     ))
                 )
                 
