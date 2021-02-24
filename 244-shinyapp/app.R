@@ -8,11 +8,13 @@
 library(shiny)
 library(tidyverse)
 library(bslib)
+library(tmap)
 
 # Read in sources
  source("res_sed.R")
  source("fire_hist.R")
  source("feas.R")
+ source("watersheds.R")
 
 # Set up a theme
 my_theme <- bs_theme(
@@ -42,13 +44,14 @@ ui <- fluidPage(theme = my_theme,
                            tabPanel("Subwatersheds",
                                     sidebarLayout(
                                         sidebarPanel(
-                                            radioButtons("select", label = h3("Select sub-watershed of interest:"), 
+                                            radioButtons("selectWS", label = h3("Select sub-watershed of interest:"), 
                                                     choices = list("Cosumnes River Watershed" = 1, 
                                                                    "American River Watershed" = 2, 
                                                                    "Bear River Watershed" = 3, 
                                                                    "Yuba River Watershed" = 4), 
                                                     selected = 1)),
-                                        mainPanel("Map of CABY with Subwatershed highlighted")
+                                        mainPanel("Map of CABY with Subwatershed highlighted",
+                                                  plotOutput("watersheds_plot"))
                                     )),
                            tabPanel("Fire History",
                                     sidebarLayout(
@@ -65,10 +68,10 @@ ui <- fluidPage(theme = my_theme,
                            tabPanel("Prescribed Fire Constraints",
                                     sidebarLayout(
                                         sidebarPanel(
-                                            checkboxGroupInput("checkGroup", 
-                                                               label = h3("Select feasibility constraints:"), 
-                                                                choices = list("Vegetation" = 1, 
-                                                                          "Fire History" = 2, 
+                                            checkboxGroupInput("checkGroup",
+                                                               label = h3("Select feasibility constraints:"),
+                                                                choices = list("Vegetation" = 1,
+                                                                          "Fire History" = 2,
                                                                           "Fuel Treatments" = 3,
                                                                           "Wildland Urban Interface" = 4,
                                                                           "Power Lines" = 5,
@@ -111,43 +114,43 @@ server <- function(input, output) {
     
     output$feas_plot <- renderPlot( {
         base_plot <- ggplot() +
-            theme_void() + 
+            theme_void() +
             coord_sf(xlim = c(-422820,4740), ylim = c(9265042,9765928))
-        
+
         if(all(c(1) %in% input$checkGroup)) {
-            base_plot <- base_plot +  geom_raster(data = veg_rast, 
-                                                 aes(x = x, y = y), 
+            base_plot <- base_plot +  geom_raster(data = veg_rast,
+                                                 aes(x = x, y = y),
                                                  fill = "darkgrey") }
-        
+
         if(all(c(2) %in% input$checkGroup)) {
-            base_plot <- base_plot +  geom_raster(data = firehist_rast, 
-                                                  aes(x = x, y = y), 
+            base_plot <- base_plot +  geom_raster(data = firehist_rast,
+                                                  aes(x = x, y = y),
                                                   fill = "darkgrey") }
-        
+
         if(all(c(3) %in% input$checkGroup)) {
-            base_plot <- base_plot +  geom_raster(data = fueltreat_rast, 
-                                                  aes(x = x, y = y), 
+            base_plot <- base_plot +  geom_raster(data = fueltreat_rast,
+                                                  aes(x = x, y = y),
                                                   fill = "darkgrey") }
-        
+
         if(all(c(4) %in% input$checkGroup)) {
-            base_plot <- base_plot +  geom_raster(data = WUI_rast, 
-                                                  aes(x = x, y = y), 
+            base_plot <- base_plot +  geom_raster(data = WUI_rast,
+                                                  aes(x = x, y = y),
                                                   fill = "darkgrey") }
-        
+
         if(all(c(5) %in% input$checkGroup)) {
-            base_plot <- base_plot +  geom_raster(data = powerlines_rast, 
-                                                  aes(x = x, y = y), 
+            base_plot <- base_plot +  geom_raster(data = powerlines_rast,
+                                                  aes(x = x, y = y),
                                                   fill = "darkgrey") }
-        
+
         if(all(c(6) %in% input$checkGroup)) {
-            base_plot <- base_plot +  geom_raster(data = roadless_rast, 
-                                                  aes(x = x, y = y), 
+            base_plot <- base_plot +  geom_raster(data = roadless_rast,
+                                                  aes(x = x, y = y),
                                                   fill = "darkgrey") }
 
         base_plot
-        
+
         })
-    
+
     fire_hist_reactive <- reactive ( {
         
         fire_hist %>%
@@ -163,6 +166,25 @@ server <- function(input, output) {
             theme_minimal() +
             scale_x_continuous(expand = c(0,0)) +
             scale_y_continuous(expand = c(0,0))
+    )
+    
+    caby_reactive <- reactive ( {
+        
+        caby %>% 
+            mutate(highlight = ifelse(shinycode %in% input$selectWS, "yes", "no"))
+        
+    })
+    
+    output$watersheds_plot <- renderPlot(
+        ggplot(data = caby_reactive()) +
+            geom_sf(aes(fill = highlight), color = "white") +
+            scale_fill_manual(values = c("yes"="tomato", "no" ="gray"))+
+            labs( x = "Longitude",
+                  y = "Latitude") +
+            theme_minimal() +
+            scale_x_continuous(expand = c(0,0)) +
+            scale_y_continuous(expand = c(0,0)) +
+            theme(legend.position = "none")
     )
 }
 
