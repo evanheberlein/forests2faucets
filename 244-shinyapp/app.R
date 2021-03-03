@@ -1,8 +1,3 @@
-## FYI RUNNING INTO SOME ISSUES WITH SOURCES. 
-## IF ALL WAS IN ENVIRONMENT, THEN WAS HAPPY. 
-## EXCEPT FOR RASTERS. UNHAPPY. 
-## INTERACTIVITY NOT EXISTANT FOR FEAS or FIRE HIST. 
-
 # Set up libraries
 
 library(shiny)
@@ -145,7 +140,8 @@ server <- function(input, output) {
 
         base_plot
 
-        })
+        }) %>% 
+        bindCache(input$checkGroup)
 
     fire_hist_reactive <- reactive ( {
         
@@ -160,7 +156,8 @@ server <- function(input, output) {
             labs( x = "Year",
                   y = "Total Area Burned (ac)") +
             theme_minimal() +
-            scale_x_continuous(expand = c(0,0)) +
+            scale_x_continuous(expand = c(0,0),
+                               breaks = seq(2000, 2020, by = 2)) +
             scale_y_continuous(expand = c(0,0))
     )
     
