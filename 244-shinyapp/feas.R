@@ -46,21 +46,19 @@ WUI_rast <- here("data", "Feasibility_data", "Feas_WUI.tif") %>%
   filter(Feas_WUI > 0)
 
 # Read in CABY Boundary
-CABY <- read_sf(here("data", "CABY_Boundary", "CABY_Boundary.shp")) %>% 
+CABY <- read_sf(here("data", "CABY_Boundary", "CABY_Boundary_Project.shp")) %>% 
   clean_names() %>% 
-  dplyr::select(rbname, acres) #%>% 
- # st_transform(CABY, st_crs(veg_rast_pt))#%>% 
-
+  dplyr::select(rbname, acres) 
 
 # TEST
 # ggplot() +
-#   #geom_sf(data = CABY, color = "red") +
+#   geom_sf(data = CABY, color = "red") +
 #   geom_raster(data = veg_rast, aes(x = x, y = y), fill = "darkgrey") +
-#   geom_raster(data = firehist_rast, aes(x = x, y = y), fill = "darkgrey") +
-#   geom_raster(data = fueltreat_rast, aes(x = x, y = y), fill = "darkgrey") +
-#   geom_raster(data = powerlines_rast, aes(x = x, y = y), fill = "darkgrey") +
-#   geom_raster(data = roadless_rast, aes(x = x, y = y), fill = "darkgrey") +
-#   geom_raster(data = WUI_rast, aes(x = x, y = y), fill = "darkgrey") +
-#   theme_void() + 
+#   # geom_raster(data = firehist_rast, aes(x = x, y = y), fill = "darkgrey") +
+#   # geom_raster(data = fueltreat_rast, aes(x = x, y = y), fill = "darkgrey") +
+#   # geom_raster(data = powerlines_rast, aes(x = x, y = y), fill = "darkgrey") +
+#   # geom_raster(data = roadless_rast, aes(x = x, y = y), fill = "darkgrey") +
+#   # geom_raster(data = WUI_rast, aes(x = x, y = y), fill = "darkgrey") +
+#   theme_void() +
 #   coord_sf(xlim = c(-422820,4740), ylim = c(9265042,9765928))
-
+# 

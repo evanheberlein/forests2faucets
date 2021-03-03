@@ -79,7 +79,7 @@ ui <- fluidPage(theme = my_theme,
                                                         label = h3("Select Percent Reservoir Capacity Remaining"), 
                                                         min = 0, 
                                                         max = 100, 
-                                                        value = c(40, 60))),
+                                                        value = c(0, 100))),
                                         mainPanel(plotOutput("res_sed_plot"))
                                     ))
                 )
@@ -94,17 +94,21 @@ server <- function(input, output) {
     })
     
     output$res_sed_plot <- renderPlot(
-        ggplot(data = res_sed_reactive(), aes(x = year, y = percent_remaining)) +
+        ggplot(data = res_sed_reactive(), aes(x = stor_cap_af, y = percent_remaining)) +
             geom_point(aes(color = stor_cap_af))+
-            scale_x_log10()+
+            scale_x_continuous(trans = "log10", limits = c(1e2,1e6), label = comma_format(accuracy = 1))+
+            scale_y_continuous(limits = c(0,100))+
             scale_color_gradient(trans = "log10")+
-            labs( x = "Year",
-                  y = "Percent capacity remaining") +
-            theme_minimal()
+            labs( x = "Reservoir Capacity (acrefeet)",
+                  y = "Percent capacity remaining",
+                  color = "Reservoir Capacity (af)") +
+            theme_minimal()+
+            annotation_logticks(sides = "b")
     )
     
     output$feas_plot <- renderPlot( {
         base_plot <- ggplot() +
+            geom_sf(data = CABY, color = "red", fill = "white") +
             theme_void() +
             coord_sf(xlim = c(-422820,4740), ylim = c(9265042,9765928))
 
