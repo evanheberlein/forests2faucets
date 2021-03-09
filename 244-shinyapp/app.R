@@ -45,7 +45,8 @@ ui <- fluidPage(theme = my_theme,
                                                                    "Bear River Watershed" = 3, 
                                                                    "Yuba River Watershed" = 4), 
                                                     selected = 1)),
-                                        mainPanel(plotOutput("watersheds_plot"))
+                                        mainPanel(plotOutput("watersheds_plot"),
+                                                  p("Data citation: ", a(href="https://services6.arcgis.com/MtSzpOZ2FMytnchL/arcgis/rest/services/CABY_BOUNDARIES/FeatureServer", "CABY IRWM HUC-8 watersheds")))
                                     )),
                            tabPanel("Fire History",
                                     sidebarLayout(
@@ -56,7 +57,8 @@ ui <- fluidPage(theme = my_theme,
                                                       selected = 2017,
                                                       multiple = TRUE)
                                         ),
-                                        mainPanel(plotOutput("fire_hist_plot"))
+                                        mainPanel(plotOutput("fire_hist_plot"),
+                                                  p("Data citation: ", a(href="https://frap.fire.ca.gov/mapping/gis-data/", "CAL FIRE/USFS historic fire perimeters")))
                                     )),
                            tabPanel("Prescribed Fire Constraints",
                                     sidebarLayout(
@@ -66,21 +68,28 @@ ui <- fluidPage(theme = my_theme,
                                                                 choices = list("Vegetation" = 1,
                                                                           "Fire History" = 2,
                                                                           "Fuel Treatments" = 3,
-                                                                          "Wildland Urban Interface" = 4,
+                                                                          "Wildland Urban Interface" = 4, 
                                                                           "Power Lines" = 5,
                                                                           "Roadless Areas" = 6),
                                                                 selected = 1)),
-                                        mainPanel(plotOutput("feas_plot"))
+                                        mainPanel(plotOutput("feas_plot"),
+                                                  p("Data citations: ", a(href="https://frap.fire.ca.gov/mapping/gis-data/", "CAL FIRE/USFS historic fire perimeters, "),
+                                                    a(href="http://silvis.forest.wisc.edu/data/wui-change/", "UW-Madison Silvis Lab WUI, "),
+                                                    a(href="https://enterprisecontentnew-usfs.hub.arcgis.com/datasets/roadless-areas-2001-roadless-rule-feature-layer?geometry=-121.199%2C39.043%2C-119.157%2C39.416", "USFS IRAs, "),
+                                                    a(href="https://apps.wildlife.ca.gov/bios/", "CEC powerlines, "),
+                                                    a(href="https://enterprisecontentnew-usfs.hub.arcgis.com/datasets/hazardous-fuel-treatment-reduction-polygon-feature-layer?geometry=-59.783%2C-29.487%2C-161.736%2C87.322", "USFS hazardous fuel treatment reduction, "),
+                                                    a(href="https://iftdss.firenet.gov/landing_page/", "IFTDSS LANDFIRE Landscape")))
                                     )),
                            tabPanel("Reservoir Sedimentation",
                                     sidebarLayout(
                                         sidebarPanel(
                                             sliderInput("slider2", 
-                                                        label = h3("Select Percent Reservoir Capacity Remaining"), 
+                                                        label = h3("Select percent reservoir capacity remaining:"), 
                                                         min = 0, 
                                                         max = 100, 
                                                         value = c(0, 100))),
-                                        mainPanel(plotOutput("res_sed_plot"))
+                                        mainPanel(plotOutput("res_sed_plot"),
+                                                  p("Data citation: ", a(href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2007WR006703", "Minear & Kondolf (2009) reservoir percent capacity remaining")))
                                     ))
                 )
                 
