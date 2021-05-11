@@ -1,0 +1,1 @@
+percent_rank<- function(x) round(ifelse(is.na(x),NA,rank(x)/sum(!is.na(x))),4)

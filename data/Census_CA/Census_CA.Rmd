@@ -1,0 +1,219 @@
+---
+title: "Census_CA"
+author: "Simone Albuquerque"
+date: "5/11/2021"
+output: html_document
+---
+---
+title: "SI_Data"
+author: "Simone Albuquerque"
+date: "1/28/2021"
+output: html_document
+---
+```{r}
+# load packages
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(raster)
+library(rgdal)
+library(tidycensus)
+options(tigris_use_cache = TRUE)
+library(viridis)
+library (tidyselect)
+library(sf)
+library(sp)
+library(raster)
+library(here)
+```
+
+
+```{r install API Key}
+#Set working directory as script source directory
+# census_api_key("93e3dc2cf11a676fd55d255280fc0927c1fd72b9", overwrite = FALSE, install = TRUE)
+#Sys.getenv("CENSUS_API_KEY") to check the key
+```
+
+```{r Sort Counties in Region of interest from ACS 2019 data}
+# GOAL: Read in Data from American Community Census 2019 1 year census tract data on socioeconomic factors related to community disaster resilience for CA
+
+#STEP 1 - Tidycensus()::get_acs() for only counties in CA
+
+#check FIP Codes; calling in CA 06 for counties listed above 
+#can filter by county code or by state
+
+Counties<- data_frame(fips_codes) %>%
+  filter(state_code == "06")
+
+```
+
+
+```{r choose data variables for AI from ACS 2019}
+# view catageories in 2019 1 year ACS 
+
+#read in table of variable codes for socioeconomic factors of interest
+
+
+#choose variable to analyze
+AI_variables<- c(median_household_income = "B19013_001",
+              white = "B03002_003",
+              af_am = "B03002_004", 
+              hispanic = "B03002_012",
+              nat_am = "B03002_005",
+              asian = "B03002_006",
+              nh_pi = "B03002_007",
+              multiple = "B03002_009",
+              other = "B03002_008")
+
+#choose nominal variable to use to merge geometry in later
+nom_var<- "B02001_001" #total_pop
+```
+
+
+```{r call in data from ACS 2019}
+#read in data from get_acs()
+tractDf <- get_acs(geography = 'tract', #census tract scale
+                  state = 06, #for CA
+                  variables = AI_variables, #call in variables
+                  geometry = FALSE, 
+                  output = "tidy",
+                  keep_geo_vars = TRUE,
+                  show_call = TRUE)%>%
+  dplyr::select(GEOID, NAME, variable, estimate) %>% 
+  spread(variable, estimate)
+```
+
+```{r call in data from ACS 2019}
+
+#get geometry for census tracts using 1 variable to reduce processing time 
+tractShp<- get_acs(geography = 'tract',
+                  state = 06,
+                  variables = nom_var,
+                  geometry = TRUE, 
+                  output = "tidy",
+                  keep_geo_vars = TRUE,
+                  show_call = TRUE)%>%
+  dplyr::select(-c("STATEFP", "COUNTYFP","TRACTCE", "NAME.x", "NAME.y")) %>% 
+           spread(variable, estimate) %>% 
+  rename(tot_pop = "B02001_001")
+
+
+#merge variable loaded with geography for each census tract to the rest of census data categories
+tractsShp_merge <- merge(tractShp, tractDf, by.x = 'GEOID', by.y = 'GEOID', all.x = TRUE)
+
+```
+
+```{r all data from ACS 2019 is in the right projection}
+prj <- 42303 # set projection for all layer NAD83 Albers
+
+tractsShp_NAD83 <- st_transform(tractsShp_merge,crs = prj)
+
+```
+
+
+```{r Perc_rank function used to rank each variable amongst census tracts}
+
+# Call percent rank function: calculates percentile rank like base function, but ignores NAs
+source("percent_rank.R")
+
+# Estimates from the 2015-2019 American Community Survey
+# We compile them into an adaptability index, based on Davies et. al. and Flanagan et al 2011 (social vulnerability index). Unlike Flanagan et al. & Davies et al. only race and household income are included and do not represent figures as percent of census tract. Races included are non-white. 
+
+# Remove features that don't need to be ranked
+sub_df <- dplyr::select(as.data.frame(tractsShp_NAD83), -c("GEOID","NAME", "white", "ALAND", "AWATER", "moe", "tot_pop", "AFFGEOID", "geometry")) 
+
+# Find percent rank of sums of individual percent ranks; MHI (median household income) is reversed because higher PCI=better adaptability
+
+tractsShp_NAD83$adapt_index <-percent_rank(rowSums(as.data.frame(lapply(sub_df, percent_rank)) + (1- percent_rank(sub_df["median_household_income"]))))
+
+#separate out only adaptability index data
+AI_Shp_NAD83<- tractsShp_NAD83 %>% 
+  dplyr::select(adapt_index)
+
+```
+
+```{r bring in watershed shapefile to clip data}
+
+#read in Watershed Boundary 
+WatershedShp<- st_read("HUC_12_Boundaries/HUC-12_Watershed_Boundaries.shp")
+
+#watershed transform to project CRS
+WatershedShp_NAD83<- st_transform(WatershedShp,crs = prj)
+
+```
+
+
+```{r bring in tract data and watershed shapefile to clip data}
+
+#only keep those tracts that intersect the watershed boundary
+AI_Clip_Shp_NAD83 <- st_intersection(AI_Shp_NAD83 ,WatershedShp_NAD83)
+
+# head(tractsClipShp_NAD83)
+
+```
+
+```{r Save Clipped Data as Shapefile}
+
+# Write out shapefile 
+write_sf(AI_Clip_Shp_NAD83, "AI_Clip_Shp_NAD83.shp")  
+
+```
+
+
+```{r Read in Population Density Raster}
+#read in 2010 Population Density Raster from USGS (https://www.sciencebase.gov/catalog/item/57753ebee4b07dd077c70868)
+
+pop_density<- raster("pden2010_block/pden2010_60m.tif")
+pop_density
+
+#  class      : RasterLayer 
+# dimensions : 48946, 77346, 3785777316  (nrow, ncol, ncell)
+# resolution : 60, 60  (x, y)
+# extent     : -77346, 2282807, 238542.6, 3175303  (xmin, xmax, ymin, ymax)
+# crs        : +proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
+# source     : /Users/simonealbuquerque/Desktop/Winter_2021/GP_AR/Adapatability_Index/pden2010_block/pden2010_60m.tif 
+# names      : pden2010_60m 
+# values     : 0, 3183020  (min, max)
+
+# read in Adaptability index shapefile and convert to raster for raster calculations 
+AI_Shp <- readOGR(dsn = "/Users/simonealbuquerque/Desktop/Winter_2021/GP_AR/Adapatability_Index/AI_Clip_Shp_NAD83.shp", layer ="AI_Clip_Shp_NAD83" )
+
+AI_Shp
+#use population density raster specifications to rasterize the AI data                           
+cell_size<- 60 
+lon_min <- -77346
+lon_max <- 2282807
+lat_min <- 238542.6
+lat_max <- 3175303
+ncols <- ((lon_max - lon_min)/cell_size)+1
+nrows <- ((lat_max - lat_min)/cell_size)+1 
+
+grid_pop_density <- raster(nrows=nrows, ncols=ncols, xmn=lon_min, xmx=lon_max, ymn=lat_min, ymx=lat_max, res=cell_size, crs="+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83")
+
+grid_pop_density
+
+AI_raster <- rasterize(AI_Shp, grid_pop_density, field = 1)
+plot(AI_raster)
+```
+
+
+```{r}
+#after multiplying 2010 census datagrid on populationd density to adaptability index score created above and merged to polygon then raster calculated... convert calculated scores back into % rank
+#download adaptability index normalized for Popuation density
+ai_raster_data <- read.csv('Adaptability_index_final.csv')
+
+ai_raster_data$adapt_score_caby<-perc.rank((ai_raster_data$SUM))
+write.csv(soc, "ai_raster_perc_rank.csv")
+```
+
+```{r all data from ACS 2019 is in the right projection}
+# visualize Data in CA map CRS 4269 = N. American Datum 1983 (US census) https://guides.library.duke.edu/r-geospatial/CRS
+
+# ggplot(tractsShp, aes(fill = af_am, color = af_am)) +
+# geom_sf() +
+# coord_sf(crs = 42303) +
+# scale_fill_viridis(option = "magma") +
+# scale_color_viridis(option = "magma")
+
+```
+
